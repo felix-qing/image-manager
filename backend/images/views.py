@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import action
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 from rest_framework.response import Response
 
 from .models import Album, Image
@@ -10,7 +10,7 @@ from .serializers import AlbumSerializer, ImageSerializer
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'description']
     ordering_fields = ['created_at', 'title', 'file_size']
